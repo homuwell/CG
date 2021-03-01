@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="message">
+        <h1>Поворот фигуры вокруг произвольной точки</h1>
+    </div>
+        <canvas id="content" width = 800 height = 800>
+        </canvas>
+
+    <div class="menu">
+        <h2>Ввод координат точки</h2>
+            <ul class="flex">
+                <li>
+                    <label for="x">x:</label>
+                    <input type="text" id="x" value="0">
+                </li>
+                <li>
+                    <label for="y">y:</label>
+                    <input type="text" id="y"  value="0">
+                </li>
+                <li>
+                    <button id="point" onClick="point.update()">Установить точку</button>
+                </li>
+            </ul>
+        <h2>Изменение угла фигуры</h2>
+        <ul class="flex">
+            <li>
+                <label for="deg">Градус:</label>
+                <input type="number" id="deg" value="0" min="0" max="360" step="10"  onchange="triangle.rotate()">
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script src="ShapeRotate.js"></script>
+</html>
