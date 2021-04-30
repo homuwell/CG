@@ -25,9 +25,9 @@ function Triangle() {
         for (let i = 0; i < this.new_triangle.length; i++) {
 
             if (i === 0) {
-                ctx.moveTo(this.new_triangle[i].x, this.new_triangle[i].y);
+                ctx.moveTo(this.new_triangle[i].x, -this.new_triangle[i].y);
             } else {
-                ctx.lineTo(this.new_triangle[i].x, this.new_triangle[i].y);
+                ctx.lineTo(this.new_triangle[i].x, -this.new_triangle[i].y);
             }
         }
         ctx.closePath();
@@ -64,12 +64,12 @@ function Point() {
     this.draw = () => {
         ctx.fillStyle = 'red';
         ctx.beginPath();
-        ctx.arc(this.x, this.y, 5, 0, 2 * Math.PI );
+        ctx.arc(this.x, -this.y, 5, 0, 2 * Math.PI );
         ctx.closePath();
         ctx.fill();
     }
     this.update = () => {
-        ctx.clearRect(this.x - 5 ,this.y - 5, 20, 20);
+        ctx.clearRect(this.x - 5 ,-this.y - 5, 20, 20);
         this.x = +document.getElementById('x').value;
         this.y = +document.getElementById('y').value;
         document.getElementById('deg').value = 0;
