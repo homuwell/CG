@@ -19,8 +19,24 @@ function Triangle() {
     this.draw = (color,fill) => {
         ctx.strokeStyle = color;
         ctx.fillStyle = fill;
+        ctx.beginPath();
+        if (color !== 'white' && fill !== 'white') {
+            ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
+        }
+        for (let i = 0; i < this.triangle.length; i++) {
 
-
+            if (i === 0) {
+                ctx.moveTo(this.triangle[i].x, -this.triangle[i].y);
+            } else {
+                ctx.lineTo(this.triangle[i].x, -this.triangle[i].y);
+            }
+        }
+        ctx.closePath();
+        ctx.stroke();
+        ctx.fill();
+        if (color !== 'white' && fill !== 'white') {
+            ctx.fillStyle = 'rgba(0, 0, 255, 0.5)';
+        }
         ctx.beginPath();
         for (let i = 0; i < this.new_triangle.length; i++) {
 
@@ -37,22 +53,29 @@ function Triangle() {
     this.rotate = () => {
         let deg = +document.getElementById('deg').value;
         let rad = (Math.PI / 180) * deg;
+        let radCurr = this.deg - rad;
         let x = +document.getElementById('x').value;
         let y = +document.getElementById('y').value;
         ctx.lineWidth = 4;
         this.draw('white','white');
         ctx.lineWidth = 2;
+        this.triangle = this.new_triangle;
         this.new_triangle = this.triangle.map((i) => {
-            let x_n = x + (i.x - x) * Math.cos(rad) - (i.y - y) * Math.sin(rad);
-            let y_n = y + (i.x - x) * Math.sin(rad) + (i.y - y) * Math.cos(rad);
+            let x_n = x + (i.x - x) * Math.cos(radCurr) - (i.y - y) * Math.sin(radCurr);
+            let y_n = y + (i.x - x) * Math.sin(radCurr) + (i.y - y) * Math.cos(radCurr);
             return {x:x_n, y:y_n};
         });
+        this.deg = rad;
 
         this.draw('black', 'rgba(0,0,0,0.2)');
         point.draw();
     }
     this.changeRect = () => {
+        ctx.lineWidth = 4;
+        this.draw('white','white');
+        ctx.lineWidth = 2;
         this.triangle = this.new_triangle;
+        this.deg = 0;
     }
     ctx.lineWidth = 2;
     this.draw('black','rgba(0,0,0,0.2)');
